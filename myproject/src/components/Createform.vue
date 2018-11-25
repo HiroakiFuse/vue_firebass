@@ -19,10 +19,44 @@
                 <v-text-field v-model="newReport.place" label="place" required></v-text-field>
               </v-flex>
               <v-flex xs12>
-                <v-text-field v-model="newReport.startdate" label="startdate" required></v-text-field>
+                <v-menu
+                  :close-on-content-click="false"
+                   v-model="menu"
+                   offset-x
+                   lazy
+                   transition="scale-transition"
+                   full-width
+                  min-width="290px"
+                >
+                <v-text-field
+                  slot="activator"
+                  v-model="newReport.startdate"
+                  label="startdate"
+                  prepend-icon="event"
+                  readonly>
+                </v-text-field>
+        <v-date-picker v-model="newReport.startdate" @input="menu = false"></v-date-picker>
+      </v-menu>
               </v-flex>
               <v-flex xs12>
-                <v-text-field v-model="newReport.enddate" label="enddate" required></v-text-field>
+                <v-menu
+                  :close-on-content-click="false"
+                   v-model="menu"
+                   offset-x
+                   lazy
+                   transition="scale-transition"
+                   full-width
+                  min-width="290px"
+                >
+                <v-text-field
+                  slot="activator"
+                  v-model="newReport.enddate"
+                  label="startdate"
+                  prepend-icon="event"
+                  readonly>
+                </v-text-field>
+        <v-date-picker v-model="newReport.enddate" @input="menu = false"></v-date-picker>
+      </v-menu>
               </v-flex>
               <v-flex xs12>
                 <v-text-field v-model="newReport.content" label="content" required></v-text-field>
@@ -46,8 +80,9 @@
 <script>
 import firebase from 'firebase'
 import {config} from '../firebase/firebase_config'
-const db = firebase.database();
-const reportsRef = db.ref('report');
+
+var db = firebase.database();
+var reportsRef = db.ref('report');
 
 export default {
   name: 'dialogForm',
@@ -63,7 +98,9 @@ export default {
         startdate: '',
         enddate: '',
         content: '',
-        status: ''
+        status: '',
+        menu: false,
+        modal: false
       },
       dialog: false
     }
