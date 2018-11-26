@@ -1,5 +1,5 @@
 <template>
-<v-layout row justify-center>
+  <v-layout row justify-center>
     <v-dialog v-model="dialog" persistent max-width="600px">
       <v-btn slot="activator" color="primary" dark>Create Reportform</v-btn>
       <v-card>
@@ -19,50 +19,21 @@
                 <v-text-field v-model="newReport.place" label="place" required></v-text-field>
               </v-flex>
               <v-flex xs12>
-                <v-menu
-                  :close-on-content-click="false"
-                   v-model="menu"
-                   offset-x
-                   lazy
-                   transition="scale-transition"
-                   full-width
-                  min-width="290px"
-                >
-                <v-text-field
-                  slot="activator"
-                  v-model="newReport.startdate"
-                  label="startdate"
-                  prepend-icon="event"
-                  readonly>
-                </v-text-field>
-        <v-date-picker v-model="newReport.startdate" @input="menu = false"></v-date-picker>
-      </v-menu>
+                <v-menu :close-on-content-click="false" offset-x lazy transition="scale-transition" full-width min-width="290px">
+                  <v-text-field slot="activator" v-model="newReport.startdate" label="startdate" prepend-icon="event" readonly>
+                  </v-text-field>
+                  <v-date-picker v-model="newReport.startdate"></v-date-picker>
+                </v-menu>
               </v-flex>
               <v-flex xs12>
-                <v-menu
-                  :close-on-content-click="false"
-                   v-model="menu"
-                   offset-x
-                   lazy
-                   transition="scale-transition"
-                   full-width
-                  min-width="290px"
-                >
-                <v-text-field
-                  slot="activator"
-                  v-model="newReport.enddate"
-                  label="startdate"
-                  prepend-icon="event"
-                  readonly>
-                </v-text-field>
-        <v-date-picker v-model="newReport.enddate" @input="menu = false"></v-date-picker>
-      </v-menu>
+                <v-menu :close-on-content-click="false" offset-x lazy transition="scale-transition" full-width min-width="290px">
+                  <v-text-field slot="activator" v-model="newReport.enddate" label="startdate" prepend-icon="event" readonly>
+                  </v-text-field>
+                  <v-date-picker v-model="newReport.enddate"></v-date-picker>
+                </v-menu>
               </v-flex>
               <v-flex xs12>
                 <v-text-field v-model="newReport.content" label="content" required></v-text-field>
-              </v-flex>
-              <v-flex xs12>
-                <v-text-field v-model="newReport.status" label="status" required></v-text-field>
               </v-flex>
             </v-layout>
           </v-container>
@@ -76,6 +47,7 @@
     </v-dialog>
   </v-layout>
 </template>
+
 
 <script>
 import firebase from 'firebase'
@@ -98,8 +70,7 @@ export default {
         startdate: '',
         enddate: '',
         content: '',
-        status: '',
-        menu: false,
+        status: '未承認',
         modal: false
       },
       dialog: false
@@ -114,7 +85,7 @@ export default {
       this.newReport.startdate = '';
       this.newReport.enddate = '';
       this.newReport.content = '';
-      this.newReport.status = '';
+      this.newReport.status = '未承認';
     },
   }
 }
