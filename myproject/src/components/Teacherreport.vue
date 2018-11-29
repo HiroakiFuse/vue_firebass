@@ -1,53 +1,60 @@
 <template>
-  <div class="aa">
-    <v-parallax v-bind:src="require('../assets/background.jpeg')" height="900">
-    <navi/>
+  <v-app id="inspire">
+    <v-parallax v-bind:src="require('../assets/background.jpeg')" height="610">
       <v-content>
         <v-container fluid pa-5 justify-end >
           <v-layout row justify-center>
             <v-dialog v-model="dialog" persistent max-width="600px">
               <v-card>
                 <v-card-title>
-                  <span class="headline">Edit Report</span>
+                  <span class="headline">報告書編集</span>
                 </v-card-title>
                 <v-card-text>
                   <v-container grid-list-md>
                     <v-layout wrap>
                     <v-flex xs12>
-                      <v-text-field v-model="editedItem.studentid" label="学籍番号" required></v-text-field>
+                      <v-text-field v-model="editedItem.studentid" label="studentid" required></v-text-field>
                     </v-flex>
                     <v-flex xs12>
-                      <v-text-field v-model="editedItem.company" label="会社名" required></v-text-field>
+                      <v-text-field v-model="editedItem.company" label="company" required></v-text-field>
                     </v-flex>
                     <v-flex xs12>
-                      <v-text-field v-model="editedItem.place" label="場所" required></v-text-field>
+                      <v-text-field v-model="editedItem.way" label="way" required></v-text-field>
                     </v-flex>
                     <v-flex xs12>
                       <v-menu :close-on-content-click="false"
                       offset-x
                       lazy transition="scale-transition" full-width min-width="290px">
-                        <v-text-field slot="activator" v-model="editedItem.startdate" label="開始日" prepend-icon="event" readonly>
+                        <v-text-field slot="activator" v-model="editedItem.date" label="date" prepend-icon="event" readonly>
                         </v-text-field>
-                        <v-date-picker v-model="editedItem.startdate"></v-date-picker>
+                        <v-date-picker v-model="editedItem.date"></v-date-picker>
                       </v-menu>
                     </v-flex>
                     <v-flex xs12>
-                      <v-menu :close-on-content-click="false" offset-x lazy transition="scale-transition" full-width min-width="290px">
-                        <v-text-field slot="activator" v-model="editedItem.enddate" label="終了日" prepend-icon="event" readonly>
-                        </v-text-field>
-                        <v-date-picker v-model="editedItem.enddate"></v-date-picker>
-                      </v-menu>
+                      <v-text-field v-model="editedItem.place" label="place" required></v-text-field>
                     </v-flex>
                     <v-flex xs12>
-                      <v-text-field v-model="editedItem.content" label="内容" required></v-text-field>
+                      <v-text-field v-model="editedItem.exam" label="exam" required></v-text-field>
+                    </v-flex>
+                    <v-flex xs12>
+                      <v-text-field v-model="editedItem.result" label="result" required></v-text-field>
+                    </v-flex>
+                    <v-flex xs12>
+                      <v-text-field v-model="editedItem.aptitude" label="optitude" required></v-text-field>
+                    </v-flex>
+                     <v-flex xs12>
+                      <v-text-field v-model="editedItem.overview" label="overview" required></v-text-field>
+                    </v-flex>
+                       <v-flex xs12>
+                      <v-text-field v-model="editedItem.status" label="status" required></v-text-field>
                     </v-flex>
                   </v-layout>
                   </v-container>
                 </v-card-text>
                 <v-card-actions>
                   <v-spacer></v-spacer>
-                  <v-btn color="blue darken-1" flat @click="dialog = false">Close</v-btn>
-                  <v-btn color="blue darken-1" flat @click="saveEdit(editedItem);dialog = false">Save</v-btn>
+                  <v-btn color="blue darken-1" flat @click="dialog = false">閉じる</v-btn>
+                  <v-btn color="blue darken-1" flat @click="saveEdit(editedItem);dialog = false">保存</v-btn>
                 </v-card-actions>
               </v-card>
             </v-dialog>
@@ -61,9 +68,13 @@
               <template slot="items" slot-scope="props">
                 <td class="text-xs-left">{{props.item.studentid}}</td>
                 <td class="text-xs-left">{{props.item.company}}</td>
+                <td class="text-xs-left">{{props.item.way}}</td>
+                <td class="text-xs-left">{{props.item.date}}</td>
                 <td class="text-xs-left">{{props.item.place}}</td>
-                <td class="text-xs-left">{{props.item.startdate}}</td>
-                <td class="text-xs-left">{{props.item.enddate}}</td>
+                <td class="text-xs-left">{{props.item.exam}}</td>
+                <td class="text-xs-left">{{props.item.result}}</td>
+                <td class="text-xs-left">{{props.item.optitude}}</td>
+                <td class="text-xs-left">{{props.item.overview}}</td>
                 <td class="text-xs-left">{{props.item.content}}</td>
                 <td class="text-xs-left">{{props.item.status}}</td>
                 <td class="justify-center layout px-0">
@@ -80,11 +91,27 @@
               </v-alert>
             </v-data-table>
           </flex>
-           <router-view/>
-          </v-container>
+        </v-container>
+        <!-- <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/> -->
       </v-content>
     </v-parallax>
-  </div>
+  </v-app>
 </template>
 
 <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
@@ -101,9 +128,9 @@ export const config = {
   messagingSenderId: "810812087591"
 }
 */
-var app = firebase.initializeApp(config)
+// var app = firebase.initializeApp(config)
 var db = firebase.database();
-var reportsRef = db.ref('report');
+var reportsRef = db.ref('report2');
 export default {
   name: 'Appform',
   firebase: {
@@ -120,44 +147,66 @@ export default {
           text:'学籍番号',value:'studentid'
         },
         {
-          text:'会社名',value:'company'  
+          text:'会社名',value:'company' 
+        },
+        {
+          text:'形態',value:'way' 
+        },
+        {
+          text:'日付',value:'date' 
         },
         {
           text:'場所',value:'place' 
         },
         {
-          text:'開始日',value:'startdate' 
+          text:'試験内容',value:'exam'
         },
         {
-          text:'終了日',value:'enddate' 
+          text:'結果',value:'result:' 
         },
         {
-          text:'内容',value:'content' 
+          text:'適性',value:'aptitude' 
         },
         {
-          text:'状況',value:'status' 
+          text:'概要',value:'overview' 
         },
         {
-          text:'Action',value:'action',sortable: false
+          text:'内容',value:'content'
         },
+         {
+          text:'状況',value:'status'
+        },
+        {
+          text:'Action ',value:'action'
+        }
       ],
       reports:[],
       editedIndex: -1,
       editedItem: {
         studentid: '',
-        campany: '',
+        company: '',
+        way: '',
+        date: '',
         place: '',
-        startdate: '',
-        enddate: '',
+        exam: '',
+        result: '',
+        aptitude: '',
+        overview: '',
+        status: '',
         content: ''
       },
       defaultItem: {
         studentid: '',
-        campany: '',
+        company: '',
+        way: '',
+        date: '',
         place: '',
-        startdate: '',
-        enddate: '',
-        content: ''
+        exam: '',
+        result: '',
+        aptitude: '',
+        overview: '',
+        status: '',
+        content:''
       },
       computed: {
         formTitle () {
@@ -188,10 +237,15 @@ export default {
       reportsRef.child(report['.key']).update({
         "studentid": report.studentid,
         "company": report.company,
+        "way": report.way,
+        "date": report.date,
         "place": report.place,
-        "startdate": report.startdate,
-        "enddate": report.enddate,
-        "content": report.content,
+        "exam": report.exam,
+        "result": report.result,
+        "optitude": report.optitude,
+        "overview": report.overview,
+        "status": report.status,
+        "content": report.content
       })
     }
   }

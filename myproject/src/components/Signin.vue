@@ -50,7 +50,6 @@
 -->
 <script>
 import firebase from 'firebase'
-
 var regexp = /^[A-Za-z0-9]{1}[A-Za-z0-9_.-]*@hcs.ac.jp$/;
 export default {
   name: 'Signin',
@@ -71,11 +70,11 @@ export default {
         user => {
           if(regexp.test(this.email)){
             alert('Success!')
-            this.$router.push('/teacher')
+            this.$router.push('/teacherform')
           }
           else{
           alert('Success!')
-          this.$router.push('/')
+          this.$router.push('/appform')
           console.log(this.email)
           }
         },
@@ -110,7 +109,6 @@ a {
 }
 .signin {
   margin-top: 20px;
-
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;

@@ -4,8 +4,11 @@ import Signin from '@/components/Signin'
 import Signup from '@/components/Signup'
 import Appform from '@/components/Appform'
 import Createform from '@/components/Createform'
-import hoge from '@/components/hoge'
+import Reportform from '@/components/Reportform'
+import Teacher from '@/components/Teacher'
 import Top from '@/components/Top'
+import Home from '@/components/Home'
+import Navi from '@/components/Navi'
 import firebase from 'firebase'
 Vue.use(Router)
 
@@ -13,15 +16,21 @@ let router = new Router({
   routes: [
     {
       path: '*',
-      redirect: 'signin'
+      redirect: 'Top'
     },
     {
       path: '/Top',
       name: Top,
       component: Top
     },
+    {
+      path: '/home',
+      name: Home,
+      component: Home,
+      meta: { requiresAuth: true }
+    },
   	{
-  		path: '/',
+  		path: '/appform',
   		name: 'Appform',
   		component: Appform,
       children: [
@@ -33,8 +42,14 @@ let router = new Router({
   		meta: { requiresAuth: true }
   	},
     {
+      path: '/reportform',
+      name: 'Reportform',
+      component: Reportform
+    },
+    {
       path: '/teacher',
-      component: hoge
+      component: Teacher,
+      meta: { requiresAuth: true }
     },
     {
       path: '/signin',
@@ -48,25 +63,6 @@ let router = new Router({
     }
   ]
 })
-/*
-router.beforeEach((to, from, next) => {
-  const requiresAuth = to.matched.some(record => record.meta.requireAuth)
-  if (requiresAuth) {
-    firebase.auth().onAuthStateChanged(function (user) {
-      if (user) {
-        next()
-      } else {
-        next({
-          path: '/signin',
-          query: { redirect: to.fullPath }
-        })
-      }
-    })
-  } else {
-    next()
-  }
-})
-*/
 
 /*
 router.beforeEach((to, from, next) => {
@@ -75,7 +71,7 @@ router.beforeEach((to, from, next) => {
   if (requiresAuth) {
     if (!currentUser) {
       next({
-        path: '/signin',
+        path: '/Top',
         query: { redirect: to.fullPath }
       })
     } else {

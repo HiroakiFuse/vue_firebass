@@ -41,11 +41,13 @@
                       <v-icon x-large class="blue--text text--lighten-2">color_lens</v-icon>
                     </v-card-text>
                     <v-card-title primary-title class="layout justify-center">
-                      <div class="headline text-xs-center">申請書作成機能</div>
+                      <div class="headline text-xs-center">申請書<br/>作成機能</div>
                     </v-card-title>
+                    <!--
                     <v-card-text>
                       hoge
                     </v-card-text>
+                  -->
                   </v-card>
                 </v-flex>
                 <v-flex xs12 md4>
@@ -54,11 +56,13 @@
                       <v-icon x-large class="blue--text text--lighten-2">flash_on</v-icon>
                     </v-card-text>
                     <v-card-title primary-title class="layout justify-center">
-                      <div class="headline">受験報告書作成機能</div>
+                      <div class="headline text-xs-center">受験報告書作成機能</div>
                     </v-card-title>
+                    <!--
                     <v-card-text>
                       hoge
                     </v-card-text>
+                  -->
                   </v-card>
                 </v-flex>
                 <v-flex xs12 md4>
@@ -67,11 +71,13 @@
                       <v-icon x-large class="blue--text text--lighten-2">build</v-icon>
                     </v-card-text>
                     <v-card-title primary-title class="layout justify-center">
-                      <div class="headline text-xs-center">一覧表示機能</div>
+                      <div class="headline text-xs-center">一覧表示<br/>機能</div>
                     </v-card-title>
+                    <!--
                     <v-card-text>
                       hoge
                     </v-card-text>
+                  -->
                   </v-card>
                 </v-flex>
               </v-layout>
@@ -81,12 +87,8 @@
 
   <v-parallax v-bind:src="require('../assets/section.jpg')" height="600">
           <v-layout column align-center justify-center>
-            <div class="headline white--text mb-3 text-xs-center">hoge</div>
-            <em>hoge</em>
-            <v-flex xs12 class="my-3">
-            <v-btn large outline white lighten-2 class="mt-4 white--text" @click="signIn">Sign In</v-btn>
-            <v-btn large outline white lighten-2 class="mt-4 white--text" @click="signUp">Sign Up</v-btn>
-            </v-flex>
+            <div class="headline white--text mb-3 text-xs-center"></div>
+            <em></em>
           </v-layout>
         </v-parallax>
 
@@ -97,9 +99,13 @@
                 <v-card-title primary-title class="layout justify-center">
                   <div class="headline">Company info</div>
                 </v-card-title>
+
+                <!--
                 <v-card-text>
                   hoge
                 </v-card-text>
+                -->
+
               </v-card>
             </v-flex>
             <v-flex xs12 sm4 offset-sm1>
@@ -107,16 +113,20 @@
                 <v-card-title primary-title class="layout justify-center">
                   <div class="headline">Contact us</div>
                 </v-card-title>
+
+                <!--
                 <v-card-text>
                   hoge
                 </v-card-text>
+                -->
+
                 <v-list class="transparent">
                   <v-list-tile>
                     <v-list-tile-action>
                       <v-icon class="blue--text text--lighten-2">phone</v-icon>
                     </v-list-tile-action>
                     <v-list-tile-content>
-                      <v-list-tile-title>hoge</v-list-tile-title>
+                      <v-list-tile-title>XXX-XXX-XXXX</v-list-tile-title>
                     </v-list-tile-content>
                   </v-list-tile>
                   <v-list-tile>

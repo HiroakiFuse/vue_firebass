@@ -1,4 +1,5 @@
 <template> 
+  <v-app>
   <router-view/>
   <!--
 <v-app>
@@ -12,27 +13,16 @@
   <v-footer app></v-footer>
 </v-app>
 -->
+</v-app>
 </template>
 <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
 <script>
-/*
+
 import Appform from './components/Appform.vue'
-*/
+
 
 export default {
-  /*
-  components: Appform,
-  */
+  components: Appform
 }
-</script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+</script>

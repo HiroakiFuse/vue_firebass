@@ -1,7 +1,7 @@
 <template>
-  <v-layout row justify-center>
+  <v-flex>
     <v-dialog v-model="dialog" persistent max-width="600px">
-      <v-btn slot="activator" color="primary" dark>Create Reportform</v-btn>
+      <v-btn slot="activator" block large dark >作成</v-btn>
       <v-card>
         <v-card-title>
           <span class="headline">Create Report</span>
@@ -10,30 +10,30 @@
           <v-container grid-list-md>
             <v-layout wrap>
               <v-flex xs12>
-                <v-text-field v-model="newReport.studentid" label="studentid" required></v-text-field>
+                <v-text-field v-model="newReport.studentid" label="学籍番号" :rules="[required]"></v-text-field>
               </v-flex>
               <v-flex xs12>
-                <v-text-field v-model="newReport.company" label="company" required></v-text-field>
+                <v-text-field v-model="newReport.company" label="会社名" :rules="defautRules"></v-text-field>
               </v-flex>
               <v-flex xs12>
-                <v-text-field v-model="newReport.place" label="place" required></v-text-field>
+                <v-text-field v-model="newReport.place" label="場所" :rules="defautRules"></v-text-field>
               </v-flex>
               <v-flex xs12>
                 <v-menu :close-on-content-click="false" offset-x lazy transition="scale-transition" full-width min-width="290px">
-                  <v-text-field slot="activator" v-model="newReport.startdate" label="startdate" prepend-icon="event" readonly>
+                  <v-text-field slot="activator" v-model="newReport.startdate" label="開始日" :rules="defautRules" prepend-icon="event" readonly>
                   </v-text-field>
                   <v-date-picker v-model="newReport.startdate"></v-date-picker>
                 </v-menu>
               </v-flex>
               <v-flex xs12>
                 <v-menu :close-on-content-click="false" offset-x lazy transition="scale-transition" full-width min-width="290px">
-                  <v-text-field slot="activator" v-model="newReport.enddate" label="startdate" prepend-icon="event" readonly>
+                  <v-text-field slot="activator" v-model="newReport.enddate" label="終了日" :rules="defautRules" prepend-icon="event" readonly>
                   </v-text-field>
                   <v-date-picker v-model="newReport.enddate"></v-date-picker>
                 </v-menu>
               </v-flex>
               <v-flex xs12>
-                <v-text-field v-model="newReport.content" label="content" required></v-text-field>
+                <v-text-field v-model="newReport.content" label="内容" :rules="defautRules"></v-text-field>
               </v-flex>
             </v-layout>
           </v-container>
@@ -45,7 +45,7 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-  </v-layout>
+  </v-flex>
 </template>
 
 
@@ -73,7 +73,10 @@ export default {
         status: '未承認',
         modal: false
       },
-      dialog: false
+      dialog: false,
+      defaultRules: [
+        v => !!v || 'required',
+      ],
     }
   },
   methods: {
@@ -85,8 +88,8 @@ export default {
       this.newReport.startdate = '';
       this.newReport.enddate = '';
       this.newReport.content = '';
-      this.newReport.status = '未承認';
     },
+
   }
 }
 </script>

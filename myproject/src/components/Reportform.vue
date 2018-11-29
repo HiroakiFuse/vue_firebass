@@ -1,5 +1,5 @@
 <template>
-  <div class="aa">
+  <div class="aa">]
     <v-parallax v-bind:src="require('../assets/background.jpeg')" height="900">
     <navi/>
       <v-content>
@@ -14,32 +14,32 @@
                   <v-container grid-list-md>
                     <v-layout wrap>
                     <v-flex xs12>
-                      <v-text-field v-model="editedItem.studentid" label="学籍番号" required></v-text-field>
+                      <v-text-field v-model="editedItem.studentid" label="studentid" required></v-text-field>
                     </v-flex>
                     <v-flex xs12>
-                      <v-text-field v-model="editedItem.company" label="会社名" required></v-text-field>
+                      <v-text-field v-model="editedItem.company" label="company" required></v-text-field>
                     </v-flex>
                     <v-flex xs12>
-                      <v-text-field v-model="editedItem.place" label="場所" required></v-text-field>
+                      <v-text-field v-model="editedItem.place" label="place" required></v-text-field>
                     </v-flex>
                     <v-flex xs12>
                       <v-menu :close-on-content-click="false"
                       offset-x
                       lazy transition="scale-transition" full-width min-width="290px">
-                        <v-text-field slot="activator" v-model="editedItem.startdate" label="開始日" prepend-icon="event" readonly>
+                        <v-text-field slot="activator" v-model="editedItem.startdate" label="startdate" prepend-icon="event" readonly>
                         </v-text-field>
                         <v-date-picker v-model="editedItem.startdate"></v-date-picker>
                       </v-menu>
                     </v-flex>
                     <v-flex xs12>
                       <v-menu :close-on-content-click="false" offset-x lazy transition="scale-transition" full-width min-width="290px">
-                        <v-text-field slot="activator" v-model="editedItem.enddate" label="終了日" prepend-icon="event" readonly>
+                        <v-text-field slot="activator" v-model="editedItem.enddate" label="startdate" prepend-icon="event" readonly>
                         </v-text-field>
                         <v-date-picker v-model="editedItem.enddate"></v-date-picker>
                       </v-menu>
                     </v-flex>
                     <v-flex xs12>
-                      <v-text-field v-model="editedItem.content" label="内容" required></v-text-field>
+                      <v-text-field v-model="editedItem.content" label="content" required></v-text-field>
                     </v-flex>
                   </v-layout>
                   </v-container>
@@ -59,11 +59,15 @@
           <flex>
             <v-data-table :headers="headers" :items="reports" :search="search" class="elevation-1">
               <template slot="items" slot-scope="props">
-                <td class="text-xs-left">{{props.item.studentid}}</td>
+               <td class="text-xs-left">{{props.item.studentid}}</td>
                 <td class="text-xs-left">{{props.item.company}}</td>
+                <td class="text-xs-left">{{props.item.way}}</td>
+                <td class="text-xs-left">{{props.item.date}}</td>
                 <td class="text-xs-left">{{props.item.place}}</td>
-                <td class="text-xs-left">{{props.item.startdate}}</td>
-                <td class="text-xs-left">{{props.item.enddate}}</td>
+                <td class="text-xs-left">{{props.item.exam}}</td>
+                <td class="text-xs-left">{{props.item.result}}</td>
+                <td class="text-xs-left">{{props.item.optitude}}</td>
+                <td class="text-xs-left">{{props.item.overview}}</td>
                 <td class="text-xs-left">{{props.item.content}}</td>
                 <td class="text-xs-left">{{props.item.status}}</td>
                 <td class="justify-center layout px-0">
@@ -80,8 +84,25 @@
               </v-alert>
             </v-data-table>
           </flex>
-           <router-view/>
-          </v-container>
+          <router-view />
+        </v-container>
+        <!-- <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/> -->
       </v-content>
     </v-parallax>
   </div>
@@ -101,9 +122,9 @@ export const config = {
   messagingSenderId: "810812087591"
 }
 */
-var app = firebase.initializeApp(config)
+// var app = firebase.initializeApp(config)
 var db = firebase.database();
-var reportsRef = db.ref('report');
+var reportsRef = db.ref('report2');
 export default {
   name: 'Appform',
   firebase: {
@@ -116,30 +137,42 @@ export default {
       drawer: false,
       search: '',
       headers: [
-        {
+       {
           text:'学籍番号',value:'studentid'
         },
         {
-          text:'会社名',value:'company'  
+          text:'会社名',value:'company' 
+        },
+        {
+          text:'形態',value:'way' 
+        },
+        {
+          text:'日付',value:'date' 
         },
         {
           text:'場所',value:'place' 
         },
         {
-          text:'開始日',value:'startdate' 
+          text:'試験内容',value:'exam'
         },
         {
-          text:'終了日',value:'enddate' 
+          text:'結果',value:'result:' 
         },
         {
-          text:'内容',value:'content' 
+          text:'適性',value:'aptitude' 
         },
         {
-          text:'状況',value:'status' 
+          text:'概要',value:'overview' 
         },
         {
-          text:'Action',value:'action',sortable: false
+          text:'内容',value:'content'
         },
+         {
+          text:'状況',value:'status'
+        },
+        {
+          text:'Action ',value:'action'
+        }
       ],
       reports:[],
       editedIndex: -1,
