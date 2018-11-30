@@ -71,8 +71,8 @@ export default {
         enddate: '',
         content: '',
         status: '未承認',
-        modal: false
       },
+      modal: false,
       dialog: false,
       defaultRules: [
         v => !!v || 'required',
