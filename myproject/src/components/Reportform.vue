@@ -14,32 +14,40 @@
                   <v-container grid-list-md>
                     <v-layout wrap>
                     <v-flex xs12>
-                      <v-text-field v-model="editedItem.studentid" label="studentid" required></v-text-field>
+                      <v-text-field v-model="editedItem.studentid" label="学籍番号" required></v-text-field>
                     </v-flex>
                     <v-flex xs12>
-                      <v-text-field v-model="editedItem.company" label="company" required></v-text-field>
+                      <v-text-field v-model="editedItem.company" label="会社名" required></v-text-field>
                     </v-flex>
                     <v-flex xs12>
-                      <v-text-field v-model="editedItem.place" label="place" required></v-text-field>
+                      <v-text-field v-model="editedItem.way" label="形態" required></v-text-field>
                     </v-flex>
                     <v-flex xs12>
                       <v-menu :close-on-content-click="false"
                       offset-x
                       lazy transition="scale-transition" full-width min-width="290px">
-                        <v-text-field slot="activator" v-model="editedItem.startdate" label="startdate" prepend-icon="event" readonly>
+                        <v-text-field slot="activator" v-model="editedItem.date" label="日付" prepend-icon="event" readonly>
                         </v-text-field>
-                        <v-date-picker v-model="editedItem.startdate"></v-date-picker>
+                        <v-date-picker v-model="editedItem.date"></v-date-picker>
                       </v-menu>
                     </v-flex>
                     <v-flex xs12>
-                      <v-menu :close-on-content-click="false" offset-x lazy transition="scale-transition" full-width min-width="290px">
-                        <v-text-field slot="activator" v-model="editedItem.enddate" label="startdate" prepend-icon="event" readonly>
-                        </v-text-field>
-                        <v-date-picker v-model="editedItem.enddate"></v-date-picker>
-                      </v-menu>
+                      <v-text-field v-model="editedItem.place" label="場所" required></v-text-field>
                     </v-flex>
                     <v-flex xs12>
-                      <v-text-field v-model="editedItem.content" label="content" required></v-text-field>
+                      <v-text-field v-model="editedItem.exam" label="試験内容" required></v-text-field>
+                    </v-flex>
+                    <v-flex xs12>
+                      <v-text-field v-model="editedItem.result" label="結果" required></v-text-field>
+                    </v-flex>
+                    <v-flex xs12>
+                      <v-text-field v-model="editedItem.aptitude" label="適性" required></v-text-field>
+                    </v-flex>
+                    <v-flex xs12>
+                      <v-text-field v-model="editedItem.overview" label="概要" required></v-text-field>
+                    </v-flex>
+                    <v-flex xs12>
+                      <v-text-field v-model="editedItem.content" label="内容" required></v-text-field>
                     </v-flex>
                   </v-layout>
                   </v-container>
@@ -61,12 +69,10 @@
               <template slot="items" slot-scope="props">
                <td class="text-xs-left">{{props.item.studentid}}</td>
                 <td class="text-xs-left">{{props.item.company}}</td>
-                <td class="text-xs-left">{{props.item.way}}</td>
                 <td class="text-xs-left">{{props.item.date}}</td>
                 <td class="text-xs-left">{{props.item.place}}</td>
                 <td class="text-xs-left">{{props.item.exam}}</td>
                 <td class="text-xs-left">{{props.item.result}}</td>
-                <td class="text-xs-left">{{props.item.optitude}}</td>
                 <td class="text-xs-left">{{props.item.overview}}</td>
                 <td class="text-xs-left">{{props.item.content}}</td>
                 <td class="text-xs-left">{{props.item.status}}</td>
@@ -86,23 +92,6 @@
           </flex>
           <router-view />
         </v-container>
-        <!-- <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/> -->
       </v-content>
     </v-parallax>
   </div>
@@ -112,17 +101,8 @@
 <script>
 import firebase from 'firebase'
 import {config} from '../firebase/firebase_config'
-import Navi from '@/components/Navi'/*
-export const config = {
-  apiKey: "AIzaSyB8ZVjhyO5CvSpO4Iu6n0MmmsO_uOLPyPs",
-  authDomain: "fk6-co.firebaseapp.com",
-  databaseURL: "https://fk6-co.firebaseio.com",
-  projectId: "fk6-co",
-  storageBucket: "fk6-co.appspot.com",
-  messagingSenderId: "810812087591"
-}
-*/
-// var app = firebase.initializeApp(config)
+import Navi from '@/components/Navi'
+
 var db = firebase.database();
 var reportsRef = db.ref('report2');
 export default {
@@ -144,9 +124,6 @@ export default {
           text:'会社名',value:'company' 
         },
         {
-          text:'形態',value:'way' 
-        },
-        {
           text:'日付',value:'date' 
         },
         {
@@ -159,39 +136,46 @@ export default {
           text:'結果',value:'result:' 
         },
         {
-          text:'適性',value:'aptitude' 
-        },
-        {
           text:'概要',value:'overview' 
         },
         {
           text:'内容',value:'content'
         },
-         {
-          text:'状況',value:'status'
+        {
+          text: '状況',value:'status' 
         },
         {
-          text:'Action ',value:'action'
+          text: '編集・削除',value:'action' 
         }
       ],
       reports:[],
       editedIndex: -1,
       editedItem: {
         studentid: '',
-        campany: '',
+        company: '',
+        way: '',
+        date: '',
         place: '',
-        startdate: '',
-        enddate: '',
-        content: ''
+        exam: '',
+        result: '',
+        aptitude: '',
+        overview: '',
+        content: '',
+        status: ''
       },
       defaultItem: {
         studentid: '',
-        campany: '',
+        company: '',
+        way: '',
+        date: '',
         place: '',
-        startdate: '',
-        enddate: '',
-        content: ''
-      },
+        exam: '',
+        result: '',
+        aptitude: '',
+        overview: '',
+        content: '',
+        status: '',
+        },
       computed: {
         formTitle () {
           return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
@@ -221,10 +205,15 @@ export default {
       reportsRef.child(report['.key']).update({
         "studentid": report.studentid,
         "company": report.company,
+        "way": report.way,
+        "date": report.date,
         "place": report.place,
-        "startdate": report.startdate,
-        "enddate": report.enddate,
-        "content": report.content,
+        "exam": report.exam,
+        "result": report.result,
+        "aptitude":report.aptitude,
+        "overview":report.overview,
+        "content":report.content,
+        "status":report.status
       })
     }
   }

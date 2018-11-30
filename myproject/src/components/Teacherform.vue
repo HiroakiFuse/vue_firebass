@@ -9,7 +9,7 @@
           <v-layout justify-center align-center>
               <v-card>
                 <v-card-title>
-                  <h2>Task</h2>
+                  <h2>タスク</h2>
                   <v-layout row justify-center>
                     <v-dialog v-model="dialog" persistent max-width="600px">
                       <v-card>
@@ -18,6 +18,7 @@
                         </v-card-title>
                         <v-card-text>
                           <v-container grid-list-md>
+                            <v-if 
                              <h2>
                                 Now State:{{this.editedItem.status}}
                               </h2>

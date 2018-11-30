@@ -1,55 +1,32 @@
 <template>
-  <v-app id="inspire">
-    <v-parallax v-bind:src="require('../assets/background.jpeg')" height="610">
+    <v-parallax v-bind:src="require('../assets/background.jpeg')" height="800">
       <v-content>
         <v-container fluid pa-5 justify-end >
           <v-layout row justify-center>
             <v-dialog v-model="dialog" persistent max-width="600px">
               <v-card>
                 <v-card-title>
-                  <span class="headline">報告書編集</span>
+                  <h2>タスク</h2>
                 </v-card-title>
                 <v-card-text>
                   <v-container grid-list-md>
-                    <v-layout wrap>
-                    <v-flex xs12>
-                      <v-text-field v-model="editedItem.studentid" label="studentid" required></v-text-field>
-                    </v-flex>
-                    <v-flex xs12>
-                      <v-text-field v-model="editedItem.company" label="company" required></v-text-field>
-                    </v-flex>
-                    <v-flex xs12>
-                      <v-text-field v-model="editedItem.way" label="way" required></v-text-field>
-                    </v-flex>
-                    <v-flex xs12>
-                      <v-menu :close-on-content-click="false"
-                      offset-x
-                      lazy transition="scale-transition" full-width min-width="290px">
-                        <v-text-field slot="activator" v-model="editedItem.date" label="date" prepend-icon="event" readonly>
-                        </v-text-field>
-                        <v-date-picker v-model="editedItem.date"></v-date-picker>
-                      </v-menu>
-                    </v-flex>
-                    <v-flex xs12>
-                      <v-text-field v-model="editedItem.place" label="place" required></v-text-field>
-                    </v-flex>
-                    <v-flex xs12>
-                      <v-text-field v-model="editedItem.exam" label="exam" required></v-text-field>
-                    </v-flex>
-                    <v-flex xs12>
-                      <v-text-field v-model="editedItem.result" label="result" required></v-text-field>
-                    </v-flex>
-                    <v-flex xs12>
-                      <v-text-field v-model="editedItem.aptitude" label="optitude" required></v-text-field>
-                    </v-flex>
-                     <v-flex xs12>
-                      <v-text-field v-model="editedItem.overview" label="overview" required></v-text-field>
-                    </v-flex>
-                       <v-flex xs12>
-                      <v-text-field v-model="editedItem.status" label="status" required></v-text-field>
-                    </v-flex>
-                  </v-layout>
-                  </v-container>
+                            <v-if 
+                             <h2>
+                                Now State:{{this.editedItem.status}}
+                              </h2>
+                            <v-layout align-center justify-center column fill-height>
+
+                              <v-flex xs12>
+                              
+                                <v-btn v-model="editedItem.status" label="status" required round color="success"
+                                @click="editedItem.status='承認'">承認</v-btn>
+                                <v-spacer></v-spacer>
+                                <v-btn v-model="editedItem.status" label="status" required round color="error"
+                                @click="editedItem.status='非承認'">非承認</v-btn>
+                              </v-flex>
+                            </v-layout>
+                            
+                          </v-container>
                 </v-card-text>
                 <v-card-actions>
                   <v-spacer></v-spacer>
@@ -64,7 +41,7 @@
           </v-flex>
           <br/>
           <flex>
-            <v-data-table :headers="headers" :items="reports" :search="search" class="elevation-1">
+            <v-data-table :headers="headers" :items="reports" search="未承認" :filter="filter" class="elevation-1">
               <template slot="items" slot-scope="props">
                 <td class="text-xs-left">{{props.item.studentid}}</td>
                 <td class="text-xs-left">{{props.item.company}}</td>
@@ -81,9 +58,6 @@
                   <v-icon small class="mr-2" @click="editItem(props.item)">
                     edit
                   </v-icon>
-                  <v-icon small @click="removeReport(props.item)">
-                    delete
-                  </v-icon>
                 </td>
               </template>
               <v-alert slot="no-results" :value="true" color="error" icon="warning">
@@ -92,26 +66,9 @@
             </v-data-table>
           </flex>
         </v-container>
-        <!-- <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/> -->
       </v-content>
     </v-parallax>
-  </v-app>
+
 </template>
 
 <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
@@ -183,30 +140,11 @@ export default {
       reports:[],
       editedIndex: -1,
       editedItem: {
-        studentid: '',
-        company: '',
-        way: '',
-        date: '',
-        place: '',
-        exam: '',
-        result: '',
-        aptitude: '',
-        overview: '',
         status: '',
-        content: ''
       },
       defaultItem: {
-        studentid: '',
-        company: '',
-        way: '',
-        date: '',
-        place: '',
-        exam: '',
-        result: '',
-        aptitude: '',
-        overview: '',
         status: '',
-        content:''
+
       },
       computed: {
         formTitle () {
@@ -235,18 +173,11 @@ export default {
     },
     saveEdit: function(report){
       reportsRef.child(report['.key']).update({
-        "studentid": report.studentid,
-        "company": report.company,
-        "way": report.way,
-        "date": report.date,
-        "place": report.place,
-        "exam": report.exam,
-        "result": report.result,
-        "optitude": report.optitude,
-        "overview": report.overview,
         "status": report.status,
-        "content": report.content
       })
+    },
+    filter(val, search) {
+      return val === search;
     }
   }
 }

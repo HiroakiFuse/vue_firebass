@@ -5,6 +5,7 @@ import Signup from '@/components/Signup'
 import Appform from '@/components/Appform'
 import Createform from '@/components/Createform'
 import Reportform from '@/components/Reportform'
+import CreateReport from '@/components/CreateReport'
 import Teacher from '@/components/Teacher'
 import Top from '@/components/Top'
 import Home from '@/components/Home'
@@ -44,7 +45,14 @@ let router = new Router({
     {
       path: '/reportform',
       name: 'Reportform',
-      component: Reportform
+      component: Reportform,
+      children: [
+        {
+          path: '',
+          component: CreateReport
+        }
+      ],
+      meta: { requiresAuth: true }
     },
     {
       path: '/teacher',
