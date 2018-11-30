@@ -57,7 +57,7 @@ let router = new Router({
     {
       path: '/teacher',
       component: Teacher,
-      meta: { requiresAuth: true }
+      
     },
     {
       path: '/signin',
@@ -72,7 +72,7 @@ let router = new Router({
   ]
 })
 
-/*
+
 router.beforeEach((to, from, next) => {
   let requiresAuth = to.matched.some(record => record.meta.requiresAuth)
   let currentUser = firebase.auth().currentUser
@@ -89,5 +89,5 @@ router.beforeEach((to, from, next) => {
     next()
   }
 })
-*/
+
 export default router

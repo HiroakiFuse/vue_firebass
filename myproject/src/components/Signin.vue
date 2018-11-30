@@ -64,13 +64,14 @@ export default {
       ],
     }
   },
+  
   methods: {
     signIn: function () {
       firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(
         user => {
           if(regexp.test(this.email)){
             alert('Success!')
-            this.$router.push('/teacherform')
+            this.$router.push('/teacher')
           }
           else{
           alert('Success!')

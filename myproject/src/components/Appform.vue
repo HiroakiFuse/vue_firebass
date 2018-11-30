@@ -138,7 +138,7 @@ export default {
           text:'状況',value:'status' 
         },
         {
-          text:'Action',value:'action',sortable: false
+          text:'変更・削除',value:'action',sortable: false
         },
       ],
       reports:[],

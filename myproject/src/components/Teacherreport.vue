@@ -134,7 +134,7 @@ export default {
           text:'状況',value:'status'
         },
         {
-          text:'Action ',value:'action'
+          text:'承認・非承認',value:'action'
         }
       ],
       reports:[],

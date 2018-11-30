@@ -8,8 +8,6 @@
             <br/>
           <v-layout justify-center align-center>
               <v-card>
-                <v-card-title>
-                  <h2>タスク</h2>
                   <v-layout row justify-center>
                     <v-dialog v-model="dialog" persistent max-width="600px">
                       <v-card>
@@ -44,8 +42,7 @@
                       </v-card>
                     </v-dialog>
                   </v-layout>
-
-                </v-card-title>
+                
                 <v-data-table :headers="headers" :items="reports" search="未承認" :filter="filter" class="elevation-1">
                   <template slot="items" slot-scope="props">
                     <td class="text-xs-left">{{props.item.studentid}}</td>
@@ -124,7 +121,7 @@ export default {
           text:'状況',value:'status' 
         },
         {
-          text:'Action',value:'action',sortable: false
+          text:'承認・非承認',value:'action',sortable: false
         },
       ],
       reports:[],
